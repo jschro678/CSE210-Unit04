@@ -75,8 +75,9 @@ namespace Unit04
                 fallingobject.SetFontSize(FONT_SIZE);
                 fallingobject.SetColor(color);
                 fallingobject.SetPosition(position);
-                fallingobject.SetMessage(message);
-                cast.AddActor("artifacts", fallingobject);
+                //fallingobject.SetMessage(message);
+                cast.AddActor("rock", fallingobject);
+                cast.AddActor("gem", fallingobject);
             }
 
             // start the game
