@@ -70,13 +70,13 @@ namespace Unit04
                 int b = random.Next(0, 256);
                 Color color = new Color(r, g, b);
 
-                Artifact artifact = new Artifact();
-                artifact.SetText(text);
-                artifact.SetFontSize(FONT_SIZE);
-                artifact.SetColor(color);
-                artifact.SetPosition(position);
-                artifact.SetMessage(message);
-                cast.AddActor("artifacts", artifact);
+                FallingObject fallingobject = new FallingObject();
+                fallingobject.SetText(text);
+                fallingobject.SetFontSize(FONT_SIZE);
+                fallingobject.SetColor(color);
+                fallingobject.SetPosition(position);
+                fallingobject.SetMessage(message);
+                cast.AddActor("artifacts", fallingobject);
             }
 
             // start the game
