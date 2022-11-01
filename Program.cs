@@ -20,10 +20,11 @@ namespace Unit04
         private static int FONT_SIZE = 15;
         private static int COLS = 60;
         private static int ROWS = 40;
-        private static string CAPTION = "Robot Finds Kitten";
+        private static string CAPTION = "Greed";
         private static string DATA_PATH = "Data/messages.txt";
         private static Color WHITE = new Color(255, 255, 255);
-        private static int DEFAULT_ARTIFACTS = 40;
+        private static int DEFAULT_ROCKS = 25;
+        private static int DEFAULT_GEMS = 25;
 
         /// <summary>
         /// Starts the program using the given arguments.
@@ -50,18 +51,15 @@ namespace Unit04
             robot.SetPosition(new Point(MAX_X / 2, MAX_Y / 2));
             cast.AddActor("robot", robot);
 
-            // load the messages
-            List<string> messages = File.ReadAllLines(DATA_PATH).ToList<string>();
-
             // create the artifacts
             Random random = new Random();
-            for (int i = 0; i < DEFAULT_ARTIFACTS; i++)
+            for (int i = 0; i < DEFAULT_ROCKS; i++)
             {
-                string text = ((char)random.Next(33, 126)).ToString();
-                string message = messages[i];
+                // string text = ((char)random.Next(33, 126)).ToString();
+
 
                 int x = random.Next(1, COLS);
-                int y = random.Next(1, ROWS);
+                int y = 0;
                 Point position = new Point(x, y);
                 position = position.Scale(CELL_SIZE);
 
@@ -71,15 +69,31 @@ namespace Unit04
                 Color color = new Color(r, g, b);
 
                 FallingObject fallingobject = new FallingObject();
-                fallingobject.SetText(text);
+
                 fallingobject.SetFontSize(FONT_SIZE);
+                fallingobject.SetText("0");
                 fallingobject.SetColor(color);
                 fallingobject.SetPosition(position);
-                //fallingobject.SetMessage(message);
                 cast.AddActor("rock", fallingobject);
+            }
+            for (int i = 0; i < DEFAULT_GEMS; i++)
+            {
+                int x = random.Next(1, COLS);
+                int y = 0;
+                Point position = new Point(x, y);
+                position = position.Scale(CELL_SIZE);
+                int r = random.Next(0, 256);
+                int g = random.Next(0, 256);
+                int b = random.Next(0, 256);
+                Color color = new Color(r, g, b);
+
+                FallingObject fallingobject = new FallingObject();
+                fallingobject.SetFontSize(FONT_SIZE);
+                fallingobject.SetText("*");
+                fallingobject.SetColor(color);
+                fallingobject.SetPosition(position);
                 cast.AddActor("gem", fallingobject);
             }
-
             // start the game
             KeyboardService keyboardService = new KeyboardService(CELL_SIZE);
             VideoService videoService = new VideoService(

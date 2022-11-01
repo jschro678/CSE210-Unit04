@@ -61,22 +61,23 @@ namespace Unit04.Game.Directing
         {
             Actor banner = cast.GetFirstActor("banner");
             Actor robot = cast.GetFirstActor("robot");
-            List<Actor> artifacts = cast.GetActors("artifacts");
+            List<Actor> gems = cast.GetActors("gem");
+            List<Actor> rocks = cast.GetActors("rock");
 
             banner.SetText("");
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
 
-            foreach (Actor actor in artifacts)
-            {
-                if (robot.GetPosition().Equals(actor.GetPosition()))
-                {
-                    Artifact artifact = (Artifact)actor;
-                    string message = artifact.GetMessage();
-                    banner.SetText(message);
-                }
-            }
+            // // foreach (Actor actor in artifacts)
+            // {
+            //     if (robot.GetPosition().Equals(actor.GetPosition()))
+            //     {
+            //         Artifact artifact = (Artifact)actor;
+            //         string message = artifact.GetMessage();
+            //         banner.SetText(message);
+            //     }
+            // }
         }
 
         /// <summary>
