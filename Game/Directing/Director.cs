@@ -14,6 +14,9 @@ namespace Unit04.Game.Directing
     {
         private KeyboardService keyboardService = null;
         private VideoService videoService = null;
+        private int cellSize = 15;
+        private int score = 0;
+        private int points;
 
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
@@ -68,16 +71,31 @@ namespace Unit04.Game.Directing
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
-
-            // // foreach (Actor actor in artifacts)
-            // {
-            //     if (robot.GetPosition().Equals(actor.GetPosition()))
-            //     {
-            //         Artifact artifact = (Artifact)actor;
-            //         string message = artifact.GetMessage();
-            //         banner.SetText(message);
-            //     }
-            // }
+            Random random = new Random();
+            foreach (Actor rock in rocks)
+            {
+                int y = random.Next(0, 3);
+                Point direction = new Point(0, y);
+                direction = direction.Scale(cellSize);
+                rock.SetVelocity(direction);
+                rock.MoveNext(maxX, maxY);
+            }
+            foreach (Actor actor in gems)
+            {
+                int y = random.Next(0, 3);
+                Point direction = new Point(0, y);
+                direction = direction.Scale(cellSize);
+                actor.SetVelocity(direction);
+                actor.MoveNext(maxX, maxY);
+                // Idea of points but need to flush out idea
+                // if (robot.GetPosition().Equals(actor.GetPosition()))
+                // {
+                //     FallingObject gem = (FallingObject)actor;
+                //     points = gem.getPoint();
+                //     score = points + score;
+                //     banner.SetText($"{score}");
+                // }
+            }
         }
 
         /// <summary>
