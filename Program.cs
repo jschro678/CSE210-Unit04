@@ -73,6 +73,7 @@ namespace Unit04
                 fallingobject.SetFontSize(FONT_SIZE);
                 fallingobject.SetText("0");
                 fallingobject.SetColor(color);
+                fallingobject.setPoint(-5);
                 fallingobject.SetPosition(position);
                 cast.AddActor("rock", fallingobject);
             }
@@ -91,6 +92,7 @@ namespace Unit04
                 fallingobject.SetFontSize(FONT_SIZE);
                 fallingobject.SetText("*");
                 fallingobject.SetColor(color);
+                fallingobject.setPoint(10);
                 fallingobject.SetPosition(position);
                 cast.AddActor("gem", fallingobject);
             }
