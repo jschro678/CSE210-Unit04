@@ -67,18 +67,25 @@ namespace Unit04.Game.Directing
             List<Actor> gems = cast.GetActors("gem");
             List<Actor> rocks = cast.GetActors("rock");
 
-            banner.SetText("");
+            banner.SetText($"Score: {score}");
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
             Random random = new Random();
-            foreach (Actor rock in rocks)
+            foreach (Actor actor in rocks)
             {
                 int y = random.Next(0, 3);
                 Point direction = new Point(0, y);
                 direction = direction.Scale(cellSize);
-                rock.SetVelocity(direction);
-                rock.MoveNext(maxX, maxY);
+                actor.SetVelocity(direction);
+                actor.MoveNext(maxX, maxY);
+                if (robot.GetPosition().Equals(actor.GetPosition()))
+                {
+                    FallingObject rock = (FallingObject)actor;
+                    points = rock.getPoint();
+                    score = points + score;
+                    banner.SetText($"{score}");
+                }
             }
             foreach (Actor actor in gems)
             {
@@ -87,14 +94,13 @@ namespace Unit04.Game.Directing
                 direction = direction.Scale(cellSize);
                 actor.SetVelocity(direction);
                 actor.MoveNext(maxX, maxY);
-                // Idea of points but need to flush out idea
-                // if (robot.GetPosition().Equals(actor.GetPosition()))
-                // {
-                //     FallingObject gem = (FallingObject)actor;
-                //     points = gem.getPoint();
-                //     score = points + score;
-                //     banner.SetText($"{score}");
-                // }
+                if (robot.GetPosition().Equals(actor.GetPosition()))
+                {
+                    FallingObject gem = (FallingObject)actor;
+                    points = gem.getPoint();
+                    score = points + score;
+                    banner.SetText($"{score}");
+                }
             }
         }
 
