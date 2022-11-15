@@ -74,8 +74,8 @@ namespace Unit04.Game.Directing
             Random random = new Random();
             foreach (Actor actor in rocks)
             {
-                int y = random.Next(0, 3);
-                Point direction = new Point(0, y);
+                int fally = random.Next(0, 3);
+                Point direction = new Point(0, fally);
                 direction = direction.Scale(cellSize);
                 actor.SetVelocity(direction);
                 actor.MoveNext(maxX, maxY);
@@ -85,12 +85,31 @@ namespace Unit04.Game.Directing
                     points = rock.getPoint();
                     score = points + score;
                     banner.SetText($"{score}");
+                    cast.RemoveActor("rock", rock);
+                    int x = random.Next(1, 60);
+                    int y = 0;
+                    Point position = new Point(x, y);
+                    position = position.Scale(cellSize);
+
+                    int r = random.Next(0, 256);
+                    int g = random.Next(0, 256);
+                    int b = random.Next(0, 256);
+                    Color color = new Color(r, g, b);
+
+                    FallingObject fallingobject = new FallingObject();
+
+                    fallingobject.SetFontSize(15);
+                    fallingobject.SetText("0");
+                    fallingobject.SetColor(color);
+                    fallingobject.setPoint(-5);
+                    fallingobject.SetPosition(position);
+                    cast.AddActor("rock", fallingobject);
                 }
             }
             foreach (Actor actor in gems)
             {
-                int y = random.Next(0, 3);
-                Point direction = new Point(0, y);
+                int fall_y = random.Next(0, 3);
+                Point direction = new Point(0, fall_y);
                 direction = direction.Scale(cellSize);
                 actor.SetVelocity(direction);
                 actor.MoveNext(maxX, maxY);
@@ -100,6 +119,23 @@ namespace Unit04.Game.Directing
                     points = gem.getPoint();
                     score = points + score;
                     banner.SetText($"{score}");
+                    cast.RemoveActor("gem", gem);
+                    int x = random.Next(1, 60);
+                    int y = 0;
+                    Point position = new Point(x, y);
+                    position = position.Scale(cellSize);
+                    int r = random.Next(0, 256);
+                    int g = random.Next(0, 256);
+                    int b = random.Next(0, 256);
+                    Color color = new Color(r, g, b);
+
+                    FallingObject fallingobject = new FallingObject();
+                    fallingobject.SetFontSize(15);
+                    fallingobject.SetText("*");
+                    fallingobject.SetColor(color);
+                    fallingobject.setPoint(10);
+                    fallingobject.SetPosition(position);
+                    cast.AddActor("gem", fallingobject);
                 }
             }
         }
